@@ -29,10 +29,11 @@ print("F%d  (velocidad para G01)"%(feed_rate),sep='')
 print("G10 P0 L20 X0 (set Zero x e y )\n")
 
 #Cuerpo del archivo
-for i in range((360*pasadas)+1):
-  valor = A * sin((i*pi)/90)
-  if valor == -0.0: valor = 0.0
-  print("G01 X%d Y%5.3f"%(i,valor),sep='')
+for j in range(1, pasadas+1):
+  for i in range(361):
+    valor = A * sin((i*j*pi)/90)
+    if valor == -0.0: valor = 0.0
+    print("G01 X%d Y%5.3f"%(i*j,valor),sep='')
 
 #Final, delay y home
 print("G4 P4")
