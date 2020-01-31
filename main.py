@@ -1,4 +1,4 @@
-from math import sin, pi
+import math
 import sys
 
 orig_stdout = sys.stdout 
@@ -11,8 +11,8 @@ if feed_rate == '':
 else:
   feed_rate = int(feed_rate)
 print("Feed:",feed_rate)
-A = (diameter/4) * 0.618
-print("A = ",A)
+radio = (diameter/2)
+print("Radio = ",radio)
 
 #abrimos el fichero para guardar el código
 nombre_archivo = "boca_de_pez_" + str(diameter) + "mm.gcode"
@@ -30,9 +30,11 @@ print("G10 P0 L20 X0 (set Zero x e y )\n")
 
 #Cuerpo del archivo
 for i in range((360*pasadas)+1):
-  valor = A * sin((i*pi)/90)
+  grados = math.radians(i+60)
+  resta = math.sqrt((radio**2)-((radio*math.sin(grados))**2))
+  valor = (radio/2)-resta #Formula usada
   if valor == -0.0: valor = 0.0
-  print("G01 X%d Y%5.3f"%(i,valor),sep='')
+  print("G01 X%d Y%5.3f"%(i,valor),sep='') #modificar resta por valor
 
 #Final, delay y home
 print("G4 P4")
