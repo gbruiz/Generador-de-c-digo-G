@@ -1,7 +1,3 @@
-#import cuadrado.py #Comentar esto para hacer boca de pez
-import recto.py #Comentar esto para hacer boca de pez
-
-import math
 import sys
 
 orig_stdout = sys.stdout 
@@ -18,7 +14,7 @@ radio = (diameter/2)
 print("Radio = ",radio)
 
 #abrimos el fichero para guardar el código
-nombre_archivo = "boca_de_pez_" + str(diameter) + "mm.gcode"
+nombre_archivo = "recto_" + str(diameter) + "mm.gcode"
 f = open(nombre_archivo, 'w')
 sys.stdout = f
 
@@ -32,12 +28,9 @@ print("F%d  (velocidad para G01)"%(feed_rate),sep='')
 print("G10 P0 L20 X0 (set Zero x e y )\n")
 
 #Cuerpo del archivo
-for i in range((360*pasadas)+1):
-  grados = math.radians(i+60)
-  resta = math.sqrt((radio**2)-((radio*math.sin(grados))**2))
-  valor = (radio/2)-resta #Formula usada
-  if valor == -0.0: valor = 0.0
-  print("G01 X%d Y%5.3f"%(i,valor),sep='')
+valor = 360*pasadas
+if valor == -0.0: valor = 0.0
+print("G01 X%d\n"%(valor),sep='')
 
 #Final, delay y home
 print("G4 P4")

@@ -1,12 +1,9 @@
-#import cuadrado.py #Comentar esto para hacer boca de pez
-import recto.py #Comentar esto para hacer boca de pez
-
 import math
 import sys
 
 orig_stdout = sys.stdout 
 
-diameter = float(input("Inserte el diámetro del tubo: "))
+cut_size = float(input("Inserte el tamaño del corte: "))
 pasadas = int(input("Inserte cantidad de pasadas: "))
 feed_rate = input("Inserte el feed rate(default: 600): ")
 if feed_rate == '':
@@ -14,11 +11,10 @@ if feed_rate == '':
 else:
   feed_rate = int(feed_rate)
 print("Feed:",feed_rate)
-radio = (diameter/2)
-print("Radio = ",radio)
+print("cut size: ",cut_size)
 
 #abrimos el fichero para guardar el código
-nombre_archivo = "boca_de_pez_" + str(diameter) + "mm.gcode"
+nombre_archivo = "cuadrado_" + str(cut_size) + "mm.gcode"
 f = open(nombre_archivo, 'w')
 sys.stdout = f
 
@@ -31,13 +27,13 @@ print("G21   (set units to mm)")
 print("F%d  (velocidad para G01)"%(feed_rate),sep='')
 print("G10 P0 L20 X0 (set Zero x e y )\n")
 
+y = (cut_size/2)
 #Cuerpo del archivo
-for i in range((360*pasadas)+1):
-  grados = math.radians(i+60)
-  resta = math.sqrt((radio**2)-((radio*math.sin(grados))**2))
-  valor = (radio/2)-resta #Formula usada
-  if valor == -0.0: valor = 0.0
-  print("G01 X%d Y%5.3f"%(i,valor),sep='')
+for x in range(45,(360*pasadas)+45,45):    
+    print("G01 Y%5.3f"%(y),sep='')
+    print("G01 X%d"%(x),sep='')
+    cut_size = - cut_size
+    y = y + (cut_size)
 
 #Final, delay y home
 print("G4 P4")
