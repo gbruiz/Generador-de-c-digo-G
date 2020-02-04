@@ -1,5 +1,5 @@
 #import cuadrado.py #Comentar esto para hacer boca de pez
-import recto.py #Comentar esto para hacer boca de pez
+#import recto.py #Comentar esto para hacer boca de pez
 
 import math
 import sys
