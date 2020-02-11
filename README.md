@@ -13,3 +13,5 @@ Para el corte tipo boca de pez, depende del diámetro del tubo y utiliza la fór
 Para el corte cuadrado utiliza una fórmula de for anidados
 
 Para el corte recto simplemente realiza un movimiento en el eje R
+
+*Obs: En el main se encuentra el corte boca de pez y en los otros archivos los otros tipos de corte*
