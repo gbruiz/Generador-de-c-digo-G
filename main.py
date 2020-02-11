@@ -1,11 +1,12 @@
-#import cuadrado.py #Comentar esto para hacer boca de pez
-#import recto.py #Comentar esto para hacer boca de pez
+#import cuadrado #Comentar esto para hacer boca de pez
+#import recto #Comentar esto para hacer boca de pez
 
 import math
 import sys
 
 orig_stdout = sys.stdout 
 
+print("Corte boca de pez")
 diameter = float(input("Inserte el diámetro del tubo: "))
 pasadas = int(input("Inserte cantidad de pasadas: "))
 feed_rate = input("Inserte el feed rate(default: 600): ")
@@ -30,6 +31,7 @@ print("G17   (set active plane to XY)")
 print("G21   (set units to mm)")
 print("F%d  (velocidad para G01)"%(feed_rate),sep='')
 print("G10 P0 L20 X0 (set Zero x e y )\n")
+print("M04")
 
 #Cuerpo del archivo
 for i in range((360*pasadas)+1):
@@ -40,10 +42,11 @@ for i in range((360*pasadas)+1):
   print("G01 X%d Y%5.3f"%(i,valor),sep='')
 
 #Final, delay y home
-print("G4 P4")
+print("M03")
 print("F1600")
 print("G01 X0 Y0")
 
 sys.stdout = orig_stdout
 f.close()
 print("Código creado exitosamente.")
+#

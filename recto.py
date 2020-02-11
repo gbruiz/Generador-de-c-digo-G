@@ -2,6 +2,7 @@ import sys
 
 orig_stdout = sys.stdout 
 
+print("Corte recto")
 diameter = float(input("Inserte el diámetro del tubo: "))
 pasadas = int(input("Inserte cantidad de pasadas: "))
 feed_rate = input("Inserte el feed rate(default: 600): ")
@@ -26,14 +27,14 @@ print("G17   (set active plane to XY)")
 print("G21   (set units to mm)")
 print("F%d  (velocidad para G01)"%(feed_rate),sep='')
 print("G10 P0 L20 X0 (set Zero x e y )\n")
-
+print("M04") #Encender el laser
 #Cuerpo del archivo
 valor = 360*pasadas
 if valor == -0.0: valor = 0.0
 print("G01 X%d\n"%(valor),sep='')
 
 #Final, delay y home
-print("G4 P4")
+print("M03")
 print("F1600")
 print("G01 X0 Y0")
 

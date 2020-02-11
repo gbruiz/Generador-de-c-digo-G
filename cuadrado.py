@@ -3,7 +3,8 @@ import sys
 
 orig_stdout = sys.stdout 
 
-cut_size = float(input("Inserte el tamaño del corte: "))
+print("Corte cuadrado")
+cut_size = float(input("Inserte el diámetro del tubo: "))
 pasadas = int(input("Inserte cantidad de pasadas: "))
 feed_rate = input("Inserte el feed rate(default: 600): ")
 if feed_rate == '':
@@ -26,17 +27,18 @@ print("G17   (set active plane to XY)")
 print("G21   (set units to mm)")
 print("F%d  (velocidad para G01)"%(feed_rate),sep='')
 print("G10 P0 L20 X0 (set Zero x e y )\n")
+print("M04") #Encender el laser
 
-y = (cut_size/2)
+y = (cut_size/8)
 #Cuerpo del archivo
 for x in range(45,(360*pasadas)+45,45):    
     print("G01 Y%5.3f"%(y),sep='')
     print("G01 X%d"%(x),sep='')
-    cut_size = - cut_size
-    y = y + (cut_size)
+    y = - y
+print("G01 Y%5.3f"%(y),sep='')
 
-#Final, delay y home
-print("G4 P4")
+#Apagar el laser y home
+print("M03")
 print("F1600")
 print("G01 X0 Y0")
 
